@@ -1,0 +1,22 @@
+.tags{
+  display: block;
+
+  span{
+    background-color: $tag-color;
+    border-radius: $border-radius;
+    padding: .25rem .5rem;
+    font-size: .8rem;
+    margin-right: .25rem;
+  }
+}
+
+.add-tags{
+  input[type="text"]{
+    padding: .4rem .5rem;
+    width: 60%;
+    line-height: 1rem;
+  }
+  input[type="submit"]{
+    margin-left: .5rem;
+  }
+}

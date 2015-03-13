@@ -1,0 +1,52 @@
+/*doc
+---
+title: Account Components
+name: account
+category: account
+---
+```html_example
+    <div class='example'>Amazing Style Guide coming soon...</div>
+```
+*/
+
+.account-form-wrapper{
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: whitesmoke;
+  padding: 2rem;
+  border-radius: 3px;
+
+  button[type="submit"]{
+    display: block;
+  }
+
+  .errorlist{
+    @include inset();
+    list-style: none;
+  }
+
+  label[for="id_remember"]{
+    display: inline-block;
+  }
+}
+
+.account-menu{
+  display: block;
+  height: 5rem;
+  width: 100%;
+  margin-top: 1.25rem;
+
+  h1{
+    float: left;
+  }
+
+  ul{
+    float: right;
+    margin: 0;
+
+    li{
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+}

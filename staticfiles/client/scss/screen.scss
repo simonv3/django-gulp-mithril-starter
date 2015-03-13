@@ -1,0 +1,41 @@
+/* EXTERNAL DEPENDENCIES */
+
+@import "vendor/normalize";
+@import "vendor/modular-scale";
+
+/* CONFIG AND OVERRIDES */
+@import "config";
+
+@import "shims";
+
+@import "utils/mixins";
+@import "utils/placeholders";
+
+@import "typography";
+
+@import "common/header";
+@import "common/footer";
+
+@import "common/elements"; // Base reset per our design
+
+@import "common/forms";
+@import "common/buttons";
+
+/* Import components here. */
+
+/*sample doc
+---
+title: Sample Docs
+name: example
+category: basics
+---
+```html_example
+    <div class='example'>Amazing Style Guide coming soon...</div>
+```
+*/
+
+body{
+  max-width: 640px;
+  margin: 0 auto;
+  min-height: 100%;
+}

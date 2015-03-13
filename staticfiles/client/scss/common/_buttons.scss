@@ -1,0 +1,91 @@
+/*
+ *  BUTTONS
+ *
+ */
+
+// We only allow for inactive color
+@mixin button-colors($bg-color, $color: $white, $hover-color: $bg-color) {
+  $dark-color: darken($bg-color, 20%);
+
+  box-shadow: 0px 3px 0px darken($bg-color, 20%);
+  background-color: $bg-color;
+
+  font-family: $support-font;
+
+  & {
+    color: $color;
+  }
+
+  &:hover,
+  &:focus{
+    background-color: $hover-color;
+    color: darken($hover-color, 20%);
+    box-shadow: 0px -2px 0px darken($hover-color, 20%);
+  }
+
+  &:active{
+    box-shadow: 0px -2px 0px darken($hover-color, 20%);
+  }
+}
+
+@mixin ghost-btn($color: $gray) {
+  $dark-color: darken($color, 20%);
+
+  @include button-colors($color, $color);
+  border: 2px solid $color;
+  border-bottom-width: $btn-bottom-width;
+
+  &,
+  &:hover {
+    background-color: transparent;
+  }
+
+  &:hover {
+    border-color: $dark-color;
+    color: $dark-color;
+  }
+}
+
+/* BEGIN STYLES */
+
+button,
+input[type="submit"],
+.btn{
+  $bg-color: rgb(255, 196, 254);
+  $font-color: rgb(125, 16, 148);
+
+  @include button-colors($bg-color, $font-color, pink);
+
+  &.small{
+    font-size: .8rem;
+  }
+
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+
+  border: none;
+  border-radius: $border-radius;
+  padding: .5rem 1rem;
+  transition: .1s color,
+              .1s background-color,
+              .1s box-shadow,
+              .1s margin-top;
+
+  &:hover,
+  &:focus{
+    outline: none;
+    margin-top: 2px;
+  }
+
+  &:active{
+    margin-top: 2px;
+    outline: none;
+  }
+
+}
+
+.btn-secondary {
+  @include button-colors($light-grey);
+}

@@ -1,0 +1,9 @@
+*__pycache__*
+staticfiles/build
+staticfiles/assets
+staticfiles/node_modules
+**/migrations*
+db.sqlite3
+*.pyc
+.DS_Store
+

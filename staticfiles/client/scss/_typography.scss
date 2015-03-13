@@ -1,0 +1,165 @@
+/*
+ *  TYPOGRAPHY
+ *
+ *  Gives us a great foundation for slick type. Based on bits
+ *  and pieces from typeplate.com and other sources. There is some
+ *  overlap with this file and vendor/_normalize.scss, be careful!
+ *
+ *  A good walkthrough of some of this can be found here:
+ *  http://webdesign.tutsplus.com/articles/a-web-designers-typographic-boilerplate--webdesign-15234
+ *  Scaling and rhythm based on this excellent work:
+ *  https://www.inkling.com/blog/2014/05/precision-baselines-sass-ebook-design/
+ */
+
+@import "utils/fonts";
+
+// Remove all units from a number
+@function strip-units($number) {
+ @return $number / ($number * 0 + 1);
+}
+
+ // Return an em value based on the $base-font-size or contextual size. Thanks @ijy https://gist.github.com/ijy/1441967
+@function em($target, $context: $base-font-size) {
+ @if $target == 0 { @return 0 }
+ @return strip-units($target) / strip-units($context) + 0em;
+}
+
+// Used to provide a grid based on our typography settings
+@mixin baseline-guide {
+ position: relative;
+
+ &::after {
+   position: absolute;
+   z-index: -1;
+
+   top: 0;
+   bottom: 0;
+
+   display: block;
+
+   width: 100%;
+   height: auto;
+
+   background: linear-gradient($guide-color 1px, transparent 1px);
+   background-size: 100% em($base-line-height);
+
+   content: "";
+ }
+}
+
+// Set the font-size and line-height based on our defaults
+@mixin font-size($font-size, $context: $base-font-size, $line-height: false){
+ font-size: ($font-size / $context) * 1em;
+
+ @if $line-height == true{
+   line-height:ceil($font-size / $rhythm-unit) * ($rhythm-unit / $font-size);
+ }
+}
+
+html {
+  font-family: $base-font;
+  font-size: $base-font-size;
+  line-height: (strip-units($base-line-height) / strip-units($base-font-size));
+
+  @if $show-guide == true {
+    @include baseline-guide;
+  }
+}
+
+body {
+  margin: em($base-line-height);
+
+  -webkit-font-smoothing: antialiased;
+  hyphens: auto;
+  text-rendering: optimizeLegibility;
+  word-wrap: break-word;
+
+  color: $text-color;
+}
+
+/* ESTABLISH HEADERS */
+
+// Base header sizes off of scale.
+// Use ms(x) via modular-scale for these.
+$headings: (
+  h1: ms(4),
+  h2: ms(3),
+  h3: ms(2),
+  h4: ms(1),
+  h5: ms(1),
+  h6: ms(1),
+);
+
+// Apply each header style
+@each $heading, $font-size in $headings {
+  #{$heading} {
+    @include font-size($font-size, $line-height: true);
+    margin-top: 0;
+    // Add margin bottom equal to 1 rhythm unit
+    margin-bottom: em($base-line-height, $font-size);
+  }
+}
+
+h1, h2, h3, h4 {
+  font-weight: inherit;
+}
+
+p {
+  margin-bottom: em($base-line-height);
+}
+
+/* SETUP AND RESET EVERYTHING ELSE */
+
+abbr,
+acronym,
+blockquote,
+code,
+kbd,
+q,
+samp,
+tt,
+var {
+  // http://meyerweb.com/eric/thoughts/2012/12/17/where-to-avoid-css-hyphenation
+  hyphens: none;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: $monospace-font;
+}
+
+pre code {
+  word-wrap: normal;
+  // http://css-tricks.com/almanac/properties/w/whitespace
+  white-space: -moz-pre-wrap;
+  white-space: pre-wrap;
+}
+
+pre,
+code {
+  white-space: pre;
+}
+
+abbr {
+  // https://developer.mozilla.org/en-US/docs/CSS/font-variant
+  font-variant: small-caps;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: $grey;
+}
+
+abbr[title]:hover {
+  cursor: help;
+}
+
+blockquote {
+ font-style: italic;
+}
+
+blockquote:before {
+  content: "\201C";
+  display: inline-block;
+  padding-right: .4em;
+}
